@@ -8,63 +8,84 @@
 </head>
 
 <style>
-    body{
-    margin: 0;
-    background-color: #1f2f3a;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #FFDD57;
-}
+    body {
+        margin: 0;
+        background-color: #1f2f3a;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #FFDD57;
+        height: 100vh;
+    }
 
-body h2{
-    text-transform: uppercase;
-    font-size: 35px;
-    letter-spacing: 2px;
-}
+    body h2 {
+        text-transform: uppercase;
+        font-size: 35px;
+        letter-spacing: 2px;
+        text-align: center;
+    }
 
-.input-user{
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    gap: 25px;
-}
+    .input-user {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 25px;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.input-user input{
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 20px;
-    background-color: #4a5a66;
-    color: #FFFF;
-    transition: all 0.3s ease;
-}
+    .input-user input {
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #4a5a66;
+        color: #FFFF;
+        transition: all 0.3s ease;
+        width: 80%; /* Ajuste para telas menores */
+        max-width: 400px; /* Max-width para manter o tamanho em telas grandes */
+    }
 
-.input-user input:focus{
-    background-color: #5a6b7b;
-    outline: none;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
+    .input-user input:focus {
+        background-color: #5a6b7b;
+        outline: none;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
 
-.input-user button{
-    padding: 12px;
-    font-size: 16px;
-    background-color: #FFDD57;
-    color: #1f2f3a;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    max-width: 200px;
-}
+    .input-user button {
+        padding: 12px;
+        font-size: 16px;
+        background-color: #FFDD57;
+        color: #1f2f3a;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 80%; /* Ajuste para telas menores */
+        max-width: 200px; /* Max-width para manter o tamanho em telas grandes */
+    }
 
-.input-user button:hover{
-    background-color: #FFB21D;;
-}
+    .input-user button:hover {
+        background-color: #FFB21D;
+    }
+
+    /* Estilos adicionais para garantir responsividade */
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .input-user {
+            gap: 15px; /* Ajuste o espaçamento entre os elementos em telas menores */
+        }
+
+        body h2 {
+            font-size: 28px; /* Ajuste o tamanho da fonte em telas menores */
+        }
+    }
 </style>
 
 <body class="body1">
