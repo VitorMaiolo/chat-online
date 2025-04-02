@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Online - Online Page</title>
+    <link rel="shortcut icon" href="./img/chat.png" type="image/png">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1f2f3a; 
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+h2 {
+    font-size: 36px;
+    color: #FFDD57;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center; 
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    text-align: left; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+ul li {
+    padding: 12px 20px;
+    margin: 5px 0;
+    background-color: #3c4a57;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+}
+
+
+#input {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: #4a5a66;
+    color: #fff;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+#input:focus {
+    background-color: #5a6b7b;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+
+#enviar {
+    padding: 12px 20px;
+    font-size: 18px;
+    background-color: #FFDD57; 
+    color: #1f2f3a;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+#enviar:hover {
+    background-color: #FFB21D;
+}
+
+</style>
+
+<body>
+    <h2>Chat Online</h2>
+    <div>
+        <ul id="messages"></ul>
+        
+        <input type="text" id="input" placeholder="Digite sua mensagem aqui..." autocomplete="off">
+        <button id="enviar" onclick="sendMessage()">Enviar</button>
+    </div>
+</body>
+<script>
+
+    const socket = io()
+    const message = document.getElementById('messages')
+    const input = document.getElementById('input')
+    const username = localStorage.getItem('chatUsername') || 'Anônimo'
+
+    socket.emit("register", username)
+    socket.on("chat message", function(dados) {
+        const li = document.createElement('li')
+        li.textContent = `${dados.username}: ${dados.msg}`
+        message.appendChild(li)
+    })
+
+    socket.on("user joined", function(user) {
+        const li = document.createElement('li')
+        li.textContent = `${user} entrou no chat`
+        li.style.color = 'green'
+        message.appendChild(li)
+    })
+
+    socket.on("user left", function(user) {
+        const li = document.createElement('li')
+        li.textContent = `${user} saiu do chat`
+        li.style.color = 'red'
+        message.appendChild(li)
+    })
+
+    function sendMessage() {
+        const message = input.value
+        socket.emit("chat message", message)
+        input.value = ""
+    }
+</script>
+</html>
